@@ -3,15 +3,18 @@ package pl.vilya.bs.views;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class MainWindow extends JFrame {
     private JPanel _mainPanel;
+    private JLabel _videoFileName;
 
     public MainWindow(String title) {
         super(title);
 
         initializeMenu();
 
+        setContentPane(_mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -25,6 +28,7 @@ public class MainWindow extends JFrame {
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
         JMenuItem fileOpenItem = new JMenuItem("Open", KeyEvent.VK_O);
+        fileOpenItem.addActionListener(e -> openVideoFile());
         fileMenu.add(fileOpenItem);
 
         JMenuItem fileCloseItem = new JMenuItem("Close", KeyEvent.VK_C);
@@ -34,6 +38,11 @@ public class MainWindow extends JFrame {
         menuBar.add(fileMenu);
 
         setJMenuBar(menuBar);
+    }
+
+    private void openVideoFile() {
+        File selectedFile = new VideoFileChooser().open(_mainPanel);
+        _videoFileName.setText(selectedFile.getName());
     }
 
     private void close() {
