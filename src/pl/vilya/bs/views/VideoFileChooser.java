@@ -24,9 +24,9 @@ public class VideoFileChooser {
         return open(parent, null);
     }
 
-    public File open(Component parent, String currentDirPath) {
-        if(currentDirPath != null) {
-            _fileChooser.setCurrentDirectory(new File(currentDirPath));
+    public File open(Component parent, File currentDirectory) {
+        if(currentDirectory != null) {
+            _fileChooser.setCurrentDirectory(currentDirectory);
         }
 
         if(_fileChooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {

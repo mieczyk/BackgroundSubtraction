@@ -10,6 +10,8 @@ public class Application {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.loadLibrary("opencv_ffmpeg320_64");
 
-        SwingUtilities.invokeLater(() -> new MainWindow("Background Subtraction"));
+        SwingUtilities.invokeLater(
+            () -> new MainWindow("Background Subtraction")
+        );
     }
 }
