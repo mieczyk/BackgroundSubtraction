@@ -1,5 +1,6 @@
 package pl.vilya.bs.presenters;
 
+import pl.vilya.bs.core.VideoFileStream;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.views.MainWindow;
 
@@ -20,7 +21,7 @@ public class MainPresenter {
         _lastSelectedDirectory = videoFile.getParentFile();
 
         try {
-            _video = new VideoStream(videoFile.getAbsolutePath());
+            _video = new VideoFileStream(videoFile.getAbsolutePath());
         } catch (IOException e) {
             _view.showErrorMessage(e.getMessage());
         }

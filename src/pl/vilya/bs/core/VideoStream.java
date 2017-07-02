@@ -6,32 +6,8 @@ import org.opencv.videoio.Videoio;
 
 import java.io.IOException;
 
-public class VideoStream {
+public abstract class VideoStream {
     protected VideoCapture _cap;
-
-    /**
-     * Loads video files or RTSP/HTTP stream.
-     * @param source Video file name or RTSP/HTTP stream URL.
-     */
-    public VideoStream(String source) throws IOException {
-        _cap = new VideoCapture(source);
-
-        if(!_cap.isOpened()) {
-            throw new IOException("Could not open the stream: " + source);
-        }
-    }
-
-    /**
-     * Loads web camera by device number (indexed from 0).
-     * @param device Installed webcam number.
-     */
-    public VideoStream(int device) throws IOException {
-        _cap = new VideoCapture(device);
-
-        if(!_cap.isOpened()) {
-            throw new IOException("Could not read from the device: " + device);
-        }
-    }
 
     public VideoFrame getFrame() {
         Mat frame = new Mat();
@@ -48,4 +24,6 @@ public class VideoStream {
     public double getFps() {
         return _cap.get(Videoio.CAP_PROP_FPS);
     }
+
+    public abstract void reopen() throws IOException;
 }
