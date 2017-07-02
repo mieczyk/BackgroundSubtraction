@@ -11,6 +11,8 @@ import java.io.File;
 public class MainWindow extends JFrame {
     private JPanel _mainPanel;
     private JLabel _videoLabel;
+    private JButton _startButton;
+    private JButton _stopButton;
     private MainPresenter _presenter;
 
     public MainWindow(String title) {
@@ -19,6 +21,9 @@ public class MainWindow extends JFrame {
         _presenter = new MainPresenter(this);
 
         initializeMenu();
+
+        _startButton.addActionListener(e -> _presenter.startVideoProcessing());
+        _stopButton.addActionListener(e -> _presenter.stopVideoProcessing());
 
         setContentPane(_mainPanel);
         pack();
@@ -47,13 +52,22 @@ public class MainWindow extends JFrame {
         setJMenuBar(menuBar);
     }
 
+
     public File getVideoFile(File currentDirectory) {
         return new VideoFileChooser().open(_mainPanel, currentDirectory);
     }
 
-    public void displayVideoFrame(Image frame) {
-        _videoLabel.setIcon(new ImageIcon(frame));
+    public void displayVideoImage(Image videoImage) {
+        _videoLabel.setIcon(new ImageIcon(videoImage));
         pack();
+    }
+
+    public void enableStartButton(boolean enabled) {
+        _startButton.setEnabled(enabled);
+    }
+
+    public void enableStopButton(boolean enabled) {
+        _stopButton.setEnabled(enabled);
     }
 
     public void showErrorMessage(String message) {
