@@ -10,9 +10,10 @@ import java.io.File;
 
 public class MainWindow extends JFrame {
     private JPanel _mainPanel;
-    private JLabel _videoLabel;
+    private JLabel _inputVideoLabel;
     private JButton _startButton;
     private JButton _stopButton;
+    private JLabel _maskVideoLabel;
     private MainPresenter _presenter;
 
     public MainWindow(String title) {
@@ -47,7 +48,12 @@ public class MainWindow extends JFrame {
         fileCloseItem.addActionListener(e -> close());
         fileMenu.add(fileCloseItem);
 
+        // Background Subtraction Methods menu
+        JMenu bgSubtractionMethodsMenu = new JMenu("Background Subtraction Methods");
+        bgSubtractionMethodsMenu.setMnemonic(KeyEvent.VK_B);
+
         menuBar.add(fileMenu);
+        menuBar.add(bgSubtractionMethodsMenu);
 
         setJMenuBar(menuBar);
     }
@@ -58,8 +64,7 @@ public class MainWindow extends JFrame {
     }
 
     public void displayVideoImage(Image videoImage) {
-        _videoLabel.setIcon(new ImageIcon(videoImage));
-        pack();
+        _inputVideoLabel.setIcon(new ImageIcon(videoImage));
     }
 
     public void enableStartButton(boolean enabled) {
