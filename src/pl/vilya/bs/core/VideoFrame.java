@@ -1,6 +1,8 @@
 package pl.vilya.bs.core;
 
 import org.opencv.core.Mat;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -38,5 +40,28 @@ public class VideoFrame {
                 .getData();
 
         System.arraycopy(buffer, 0, targetPixels, 0, buffer.length);
+    }
+
+    public VideoFrame resizeAndKeepAspectRatio(int targetWidth, int targetHeight) {
+        float ratio = Math.min((float)targetWidth / _mat.cols(), (float)targetHeight / _mat.rows());
+        int width = (int)(_mat.cols() * ratio);
+        int height = (int)(_mat.rows() * ratio);
+
+        int x = 0, y = 0;
+
+        if(targetWidth > width) {
+            x = (targetWidth - width) / 2;
+        }
+
+        if(targetHeight > height) {
+            y = (targetHeight - height) / 2;
+        }
+
+        Mat targetMat = Mat.zeros(targetHeight, targetWidth, _mat.type());
+        Mat targetRoi = targetMat.submat(new Rect(x, y, width, height));
+
+        Imgproc.resize(_mat, targetRoi, targetRoi.size());
+
+        return new VideoFrame(targetMat);
     }
 }
