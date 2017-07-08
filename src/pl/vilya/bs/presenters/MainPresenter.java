@@ -39,7 +39,7 @@ public class MainPresenter {
         setButtonsStateForPausedVideo();
 
         // Display the first frame
-        _view.displayVideoImage(_video.getFrame().toImage());
+        _view.displayVideoFrame(_video.getFrame());
     }
 
     public void startVideoProcessing() {

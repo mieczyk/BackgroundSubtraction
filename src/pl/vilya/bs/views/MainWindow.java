@@ -1,5 +1,6 @@
 package pl.vilya.bs.views;
 
+import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.presenters.MainPresenter;
 
 import javax.swing.*;
@@ -10,10 +11,10 @@ import java.io.File;
 
 public class MainWindow extends JFrame {
     private JPanel _mainPanel;
-    private JLabel _inputVideoLabel;
     private JButton _startButton;
     private JButton _stopButton;
-    private JLabel _maskVideoLabel;
+    private VideoViewer _inputVideoViewer;
+    private VideoViewer _maskVideoViewer;
     private MainPresenter _presenter;
 
     public MainWindow(String title) {
@@ -58,13 +59,12 @@ public class MainWindow extends JFrame {
         setJMenuBar(menuBar);
     }
 
-
     public File getVideoFile(File currentDirectory) {
         return new VideoFileChooser().open(_mainPanel, currentDirectory);
     }
 
-    public void displayVideoImage(Image videoImage) {
-        _inputVideoLabel.setIcon(new ImageIcon(videoImage));
+    public void displayVideoFrame(VideoFrame frame) {
+        _inputVideoViewer.setFrame(frame);
     }
 
     public void enableStartButton(boolean enabled) {

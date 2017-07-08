@@ -31,13 +31,13 @@
                   <size top="5" left="5" bottom="5" right="5"/>
                 </border>
                 <children>
-                  <component id="80b34" class="javax.swing.JLabel" binding="_inputVideoLabel">
+                  <component id="3efd1" class="pl.vilya.bs.views.VideoViewer" binding="_inputVideoViewer">
                     <constraints border-constraint="Center"/>
                     <properties>
                       <background color="-16777216"/>
                       <opaque value="true"/>
                       <preferredSize width="320" height="240"/>
-                      <text value=""/>
+                      <requestFocusEnabled value="true"/>
                     </properties>
                   </component>
                 </children>
@@ -58,13 +58,12 @@
                   <size top="5" left="5" bottom="5" right="5"/>
                 </border>
                 <children>
-                  <component id="ed2af" class="javax.swing.JLabel" binding="_maskVideoLabel">
+                  <component id="b4a2a" class="pl.vilya.bs.views.VideoViewer" binding="_maskVideoViewer">
                     <constraints border-constraint="Center"/>
                     <properties>
                       <background color="-16777216"/>
                       <opaque value="true"/>
                       <preferredSize width="320" height="240"/>
-                      <text value=""/>
                     </properties>
                   </component>
                 </children>
