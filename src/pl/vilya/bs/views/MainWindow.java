@@ -1,6 +1,5 @@
 package pl.vilya.bs.views;
 
-import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.presenters.MainPresenter;
 
 import javax.swing.*;
@@ -63,8 +62,8 @@ public class MainWindow extends JFrame {
         return new VideoFileChooser().open(_mainPanel, currentDirectory);
     }
 
-    public void displayVideoFrame(VideoFrame frame) {
-        _inputVideoViewer.setFrame(frame);
+    public void displayOutput(VideoImages output) {
+        _inputVideoViewer.setFrameImage(output.getInputFrameImage());
     }
 
     public void enableStartButton(boolean enabled) {

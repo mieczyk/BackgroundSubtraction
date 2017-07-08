@@ -1,6 +1,8 @@
 package pl.vilya.bs.presenters;
 
 import pl.vilya.bs.core.VideoFileStream;
+import pl.vilya.bs.core.VideoFrame;
+import pl.vilya.bs.views.VideoImages;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.views.MainWindow;
 
@@ -38,8 +40,8 @@ public class MainPresenter {
 
         setButtonsStateForPausedVideo();
 
-        // Display the first frame
-        _view.displayVideoFrame(_video.getFrame());
+        VideoFrame firstFrame = _video.getFrame();
+        _view.displayOutput(new VideoImages(firstFrame.toImage(), null));
     }
 
     public void startVideoProcessing() {

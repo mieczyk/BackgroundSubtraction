@@ -3,10 +3,11 @@ package pl.vilya.bs.presenters;
 import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.views.MainWindow;
+import pl.vilya.bs.views.VideoImages;
 
 import javax.swing.*;
 
-public class FramesProcessor extends SwingWorker<Void, VideoFrame> {
+public class FramesProcessor extends SwingWorker<Void, VideoImages> {
     private final MainWindow _view;
     private final VideoStream _video;
     private volatile boolean _paused;
@@ -32,8 +33,12 @@ public class FramesProcessor extends SwingWorker<Void, VideoFrame> {
 
         while (!isCancelled()) {
             if(!_paused && frame != null) {
-                publish(frame);
 
+                VideoImages output = new VideoImages(frame.toImage(), null);
+
+                publish(output);
+
+                frame.release();
                 frame = _video.getFrame();
 
                 Thread.sleep(interval);
@@ -50,8 +55,8 @@ public class FramesProcessor extends SwingWorker<Void, VideoFrame> {
     }
 
     @Override
-    protected void process(java.util.List<VideoFrame> frames) {
-        frames.forEach(_view::displayVideoFrame);
+    protected void process(java.util.List<VideoImages> output) {
+        output.forEach(_view::displayOutput);
     }
 
     @Override
