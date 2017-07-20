@@ -64,6 +64,7 @@ public class MainWindow extends JFrame {
 
     public void displayOutput(VideoImages output) {
         _inputVideoViewer.setFrameImage(output.getInputFrameImage());
+        _maskVideoViewer.setFrameImage(output.getMaskFrameImage());
     }
 
     public void enableStartButton(boolean enabled) {

@@ -13,6 +13,10 @@ public class VideoFrame {
         _mat = mat;
     }
 
+    public Mat getMat() {
+        return _mat;
+    }
+
     public Image toImage() {
         BufferedImage resultImage = new BufferedImage(
                 _mat.cols(),
