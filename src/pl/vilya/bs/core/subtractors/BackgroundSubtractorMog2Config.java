@@ -187,6 +187,21 @@ public class BackgroundSubtractorMog2Config extends BackgroundSubtractorConfig<B
         _learningRate = -1;
     }
 
+    public BackgroundSubtractorMog2Config(BackgroundSubtractorMog2Config config) {
+        _history = config.getHistory();
+        _threshold = config.getThreshold();
+        _mixtures = config.getMixtures();
+        _backgroundRatio = config.getBackgroundRatio();
+        _initialVariance = config.getInitialVariance();
+        _maxVariance = config.getMaxVariance();
+        _minVariance = config.getMinVariance();
+        _complexityReduction = config.getComplexityReduction();
+        _detectShadow = config.getDetectShadow();
+        _shadowValue = config.getShadowValue();
+        _shadowThreshold = config.getShadowThreshold();
+        _learningRate = config.getLearningRate();
+    }
+
     @Override
     public void apply(BackgroundSubtractorMOG2 subtractor) {
         subtractor.setHistory(_history);
