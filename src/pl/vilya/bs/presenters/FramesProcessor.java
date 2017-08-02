@@ -1,6 +1,5 @@
 package pl.vilya.bs.presenters;
 
-import org.opencv.video.Video;
 import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
@@ -15,11 +14,14 @@ public class FramesProcessor extends SwingWorker<Void, VideoImages> {
     private volatile boolean _paused;
     private final BackgroundSubtractionMethod _bgSubtractionMethod;
 
-    public FramesProcessor(MainWindow view, VideoStream video) {
+    public FramesProcessor(
+            MainWindow view,
+            VideoStream video,
+            BackgroundSubtractionMethod bgSubtractionMethod
+    ) {
         _view = view;
         _video = video;
-        _bgSubtractionMethod =
-                new BackgroundSubtractionMethod(Video.createBackgroundSubtractorMOG2());
+        _bgSubtractionMethod = bgSubtractionMethod;
     }
 
     public void pause() {
@@ -39,7 +41,7 @@ public class FramesProcessor extends SwingWorker<Void, VideoImages> {
         while (!isCancelled()) {
             if(!_paused && frame != null) {
 
-                VideoFrame mask = _bgSubtractionMethod.apply(frame);
+                VideoFrame mask = _bgSubtractionMethod.applyCurrent(frame);
                 VideoImages output = new VideoImages(frame.toImage(), mask.toImage());
 
                 publish(output);

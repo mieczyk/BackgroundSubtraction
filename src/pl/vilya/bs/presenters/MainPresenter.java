@@ -1,10 +1,14 @@
 package pl.vilya.bs.presenters;
 
+import org.opencv.video.BackgroundSubtractorMOG2;
 import pl.vilya.bs.core.VideoFileStream;
 import pl.vilya.bs.core.VideoFrame;
-import pl.vilya.bs.views.VideoImages;
 import pl.vilya.bs.core.VideoStream;
+import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
+import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
+import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
 import pl.vilya.bs.views.MainWindow;
+import pl.vilya.bs.views.VideoImages;
 
 import javax.swing.*;
 import java.io.File;
@@ -15,9 +19,11 @@ public class MainPresenter {
     private File _lastSelectedDirectory = null;
     private VideoStream _video = null;
     private FramesProcessor _processor = null;
+    private final BackgroundSubtractionMethod _bgSubtractionMethod;
 
     public MainPresenter(MainWindow view) {
         _view = view;
+        _bgSubtractionMethod = new BackgroundSubtractionMethod();
     }
 
     public void openVideoFile() {
@@ -51,7 +57,7 @@ public class MainPresenter {
         }
 
         if(_processor == null) {
-            _processor = new FramesProcessor(_view, _video);
+            _processor = new FramesProcessor(_view, _video, _bgSubtractionMethod);
         }
 
         SwingWorker.StateValue state = _processor.getState();
@@ -69,7 +75,7 @@ public class MainPresenter {
                     return;
                 }
 
-                _processor = new FramesProcessor(_view, _video);
+                _processor = new FramesProcessor(_view, _video , _bgSubtractionMethod);
                 _processor.execute();
                 break;
 
@@ -96,5 +102,22 @@ public class MainPresenter {
     private void setButtonsStateForRunningVideo() {
         _view.enableStartButton(false);
         _view.enableStopButton(true);
+    }
+
+    public void selectBackgroundSubtractorMog2() {
+        BackgroundSubtractorMOG2 subtractor = (BackgroundSubtractorMOG2)
+                _bgSubtractionMethod.getSubtractor(
+                        BackgroundSubtractorMOG2.class
+                );
+
+        BackgroundSubtractorMog2Config config = new BackgroundSubtractorMog2Config(subtractor);
+
+        BgSubtractionMethodSettings<BackgroundSubtractorMog2Config> settings =
+                _view.showBackgroundSubtractorMog2Dialog(config, _bgSubtractionMethod.getLearningRate());
+
+        if(settings != null) {
+            _bgSubtractionMethod.setCurrent(BackgroundSubtractorMOG2.class, settings.getConfig());
+            _bgSubtractionMethod.setLearningRate(settings.getLearningRate());
+        }
     }
 }

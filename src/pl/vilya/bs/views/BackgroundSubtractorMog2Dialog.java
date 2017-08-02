@@ -28,13 +28,15 @@ public class BackgroundSubtractorMog2Dialog extends JDialog {
     private JCheckBox _detectShadowCheckBox;
 
     private final BackgroundSubtractorMog2Config _config;
+    private double _learningRate;
     private boolean _configSaved;
 
-    public BackgroundSubtractorMog2Dialog(BackgroundSubtractorMog2Config config) {
+    public BackgroundSubtractorMog2Dialog(BackgroundSubtractorMog2Config config, double learningRate) {
         prepareWindow();
         initializeListeners();
 
         _config = new BackgroundSubtractorMog2Config(config);
+        _learningRate = learningRate;
         _configSaved = false;
 
         showSettings();
@@ -50,7 +52,7 @@ public class BackgroundSubtractorMog2Dialog extends JDialog {
 
     private void initializeListeners() {
         _okButton.addActionListener(e -> {
-            if(updateSettings()) {
+            if (updateSettings()) {
                 exit(true);
             } else {
                 showSettings();
@@ -88,8 +90,8 @@ public class BackgroundSubtractorMog2Dialog extends JDialog {
         _maxVarianceTextField.setText(formatter.format(_config.getMaxVariance()));
         _minVarianceTextField.setText(formatter.format(_config.getMinVariance()));
         _complexityReductionTextField.setText(formatter.format(_config.getComplexityReduction()));
-        _learningRateTextField.setText(formatter.format(_config.getLearningRate()));
         _shadowThresholdTextField.setText(formatter.format(_config.getShadowThreshold()));
+        _learningRateTextField.setText(formatter.format(_learningRate));
     }
 
     private boolean updateSettings() {
@@ -104,8 +106,8 @@ public class BackgroundSubtractorMog2Dialog extends JDialog {
             _config.setMaxVariance(Double.parseDouble(_maxVarianceTextField.getText()));
             _config.setMinVariance(Double.parseDouble(_minVarianceTextField.getText()));
             _config.setComplexityReduction(Double.parseDouble(_complexityReductionTextField.getText()));
-            _config.setLearningRate(Double.parseDouble(_learningRateTextField.getText()));
             _config.setShadowThreshold(Double.parseDouble(_shadowThresholdTextField.getText()));
+            _learningRate = Double.parseDouble(_learningRateTextField.getText());
         } catch(NumberFormatException ex) {
             String message = "Invalid value. " + ex.getMessage();
             JOptionPane.showMessageDialog(_mainPanel, message, "Invalid value error", JOptionPane.ERROR_MESSAGE);
@@ -130,7 +132,11 @@ public class BackgroundSubtractorMog2Dialog extends JDialog {
         return _configSaved;
     }
 
-    public BackgroundSubtractorMog2Config getSettings() {
+    public BackgroundSubtractorMog2Config getConfig() {
         return _config;
+    }
+
+    public double getLearningRate() {
+        return _learningRate;
     }
 }

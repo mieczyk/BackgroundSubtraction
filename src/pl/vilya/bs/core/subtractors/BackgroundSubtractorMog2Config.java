@@ -114,23 +114,6 @@ public class BackgroundSubtractorMog2Config extends BackgroundSubtractorConfig<B
     }
 
     /**
-     * The value between 0 and 1 that indicates how fast the background model is learnt.
-     * Negative parameter value makes the algorithm to use some automatically chosen learning rate.
-     * 0 means that the background model is not updated at all,
-     * 1 means that the background model is completely reinitialized from the last frame.
-     */
-    private double _learningRate;
-
-    @Override
-    public double getLearningRate() {
-        return _learningRate;
-    }
-
-    public void setLearningRate(double learningRate) {
-        _learningRate = learningRate;
-    }
-
-    /**
      *  Parameter defining whether shadow detection should be enabled.
      */
     private boolean _detectShadow;
@@ -184,7 +167,6 @@ public class BackgroundSubtractorMog2Config extends BackgroundSubtractorConfig<B
         _detectShadow = subtractor.getDetectShadows();
         _shadowValue = subtractor.getShadowValue();
         _shadowThreshold = subtractor.getShadowThreshold();
-        _learningRate = -1;
     }
 
     public BackgroundSubtractorMog2Config(BackgroundSubtractorMog2Config config) {
@@ -199,7 +181,6 @@ public class BackgroundSubtractorMog2Config extends BackgroundSubtractorConfig<B
         _detectShadow = config.getDetectShadow();
         _shadowValue = config.getShadowValue();
         _shadowThreshold = config.getShadowThreshold();
-        _learningRate = config.getLearningRate();
     }
 
     @Override

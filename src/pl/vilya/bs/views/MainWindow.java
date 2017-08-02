@@ -1,6 +1,8 @@
 package pl.vilya.bs.views;
 
+import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
 import pl.vilya.bs.presenters.MainPresenter;
+import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +16,7 @@ public class MainWindow extends JFrame {
     private JButton _stopButton;
     private VideoViewer _inputVideoViewer;
     private VideoViewer _maskVideoViewer;
-    private MainPresenter _presenter;
+    private final MainPresenter _presenter;
 
     public MainWindow(String title) {
         super(title);
@@ -52,6 +54,13 @@ public class MainWindow extends JFrame {
         JMenu bgSubtractionMethodsMenu = new JMenu("Background Subtraction Methods");
         bgSubtractionMethodsMenu.setMnemonic(KeyEvent.VK_B);
 
+        JMenuItem bgSubtractorMog2Item = new JMenuItem("BackgroundSubtractorMOG2", KeyEvent.VK_M);
+        bgSubtractorMog2Item.addActionListener(e -> _presenter.selectBackgroundSubtractorMog2());
+        bgSubtractionMethodsMenu.add(bgSubtractorMog2Item);
+
+        JMenuItem bgSubtractorKnnItem = new JMenuItem("BackgroundSubtractorKNN", KeyEvent.VK_K);
+        bgSubtractionMethodsMenu.add(bgSubtractorKnnItem);
+
         menuBar.add(fileMenu);
         menuBar.add(bgSubtractionMethodsMenu);
 
@@ -73,6 +82,18 @@ public class MainWindow extends JFrame {
 
     public void enableStopButton(boolean enabled) {
         _stopButton.setEnabled(enabled);
+    }
+
+    public BgSubtractionMethodSettings<BackgroundSubtractorMog2Config> showBackgroundSubtractorMog2Dialog(
+            BackgroundSubtractorMog2Config config, double learningRate
+    ) {
+        BackgroundSubtractorMog2Dialog dialog = new BackgroundSubtractorMog2Dialog(config, learningRate);
+
+        if(dialog.showDialog()) {
+            return new BgSubtractionMethodSettings<>(dialog.getConfig(), dialog.getLearningRate());
+        }
+
+        return null;
     }
 
     public void showErrorMessage(String message) {
