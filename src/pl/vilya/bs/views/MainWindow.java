@@ -17,6 +17,9 @@ public class MainWindow extends JFrame {
     private JButton _stopButton;
     private VideoViewer _inputVideoViewer;
     private VideoViewer _maskVideoViewer;
+    private JLabel _frameNumberLabel;
+    private JLabel _fpsLabel;
+    private JPanel _informationPanel;
     private final MainPresenter _presenter;
 
     public MainWindow(String title) {
@@ -75,6 +78,8 @@ public class MainWindow extends JFrame {
     public void displayOutput(VideoInfo output) {
         _inputVideoViewer.setFrameImage(output.getInputFrameImage());
         _maskVideoViewer.setFrameImage(output.getMaskFrameImage());
+        _frameNumberLabel.setText(String.valueOf(output.getFrameNumber()));
+        _fpsLabel.setText(String.valueOf(output.getFps()));
     }
 
     public void enableStartButton(boolean enabled) {

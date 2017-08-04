@@ -72,27 +72,91 @@
           </grid>
         </children>
       </grid>
-      <grid id="53f33" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="393ae" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="South"/>
         <properties/>
-        <border type="empty">
-          <size top="5" left="0" bottom="0" right="0"/>
-        </border>
+        <border type="none"/>
         <children>
-          <component id="737c8" class="javax.swing.JButton" binding="_startButton">
-            <constraints/>
-            <properties>
-              <enabled value="false"/>
-              <text value="Start"/>
-            </properties>
-          </component>
-          <component id="277df" class="javax.swing.JButton" binding="_stopButton">
-            <constraints/>
-            <properties>
-              <enabled value="false"/>
-              <text value="Stop"/>
-            </properties>
-          </component>
+          <grid id="53f33" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="empty">
+              <size top="5" left="0" bottom="0" right="0"/>
+            </border>
+            <children>
+              <component id="737c8" class="javax.swing.JButton" binding="_startButton">
+                <constraints/>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="Start"/>
+                </properties>
+              </component>
+              <component id="277df" class="javax.swing.JButton" binding="_stopButton">
+                <constraints/>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="Stop"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="f8379" binding="_informationPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="etched" title="Information"/>
+            <children>
+              <grid id="5e2ee" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="5" left="5" bottom="5" right="5"/>
+                <constraints border-constraint="North"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="63de" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Frame:"/>
+                    </properties>
+                  </component>
+                  <component id="804ee" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="FPS:"/>
+                    </properties>
+                  </component>
+                  <component id="ba6e1" class="javax.swing.JLabel" binding="_frameNumberLabel">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="0"/>
+                    </properties>
+                  </component>
+                  <hspacer id="d4b9f">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <component id="79c1a" class="javax.swing.JLabel" binding="_fpsLabel">
+                    <constraints>
+                      <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="0"/>
+                    </properties>
+                  </component>
+                  <hspacer id="ed9d9">
+                    <constraints>
+                      <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                </children>
+              </grid>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

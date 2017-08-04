@@ -42,7 +42,12 @@ public class FramesProcessor extends SwingWorker<Void, VideoInfo> {
             if(!_paused && frame != null) {
 
                 VideoFrame mask = _bgSubtractionMethod.applyCurrent(frame);
-                VideoInfo output = new VideoInfo(frame.toImage(), mask.toImage());
+                VideoInfo output = new VideoInfo(
+                        frame.toImage(),
+                        mask.toImage(),
+                        _video.getFrameNumber(),
+                        _video.getFps()
+                );
 
                 publish(output);
 
@@ -61,7 +66,7 @@ public class FramesProcessor extends SwingWorker<Void, VideoInfo> {
     }
 
     private long getIntervalFromFps() {
-        return 1000 / Math.round(_video.getFps());
+        return 1000 / _video.getFps();
     }
 
     @Override

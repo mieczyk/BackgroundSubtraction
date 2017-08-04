@@ -5,10 +5,19 @@ import java.awt.*;
 public class VideoInfo {
     private final Image _inputFrameImage;
     private final Image _maskFrameImage;
+    private final int _frameNumber;
+    private final int _fps;
 
-    public VideoInfo(Image inputFrameImage, Image maskFrameImage) {
+    public VideoInfo(
+            Image inputFrameImage,
+            Image maskFrameImage,
+            int frameNumber,
+            int fps
+    ) {
         _inputFrameImage = inputFrameImage;
         _maskFrameImage = maskFrameImage;
+        _frameNumber = frameNumber;
+        _fps = fps;
     }
 
     public Image getInputFrameImage() {
@@ -17,5 +26,13 @@ public class VideoInfo {
 
     public Image getMaskFrameImage() {
         return _maskFrameImage;
+    }
+
+    public int getFrameNumber() {
+        return _frameNumber;
+    }
+
+    public int getFps() {
+        return _fps;
     }
 }

@@ -21,8 +21,12 @@ public abstract class VideoStream {
         return new VideoFrame(frame);
     }
 
-    public double getFps() {
-        return _cap.get(Videoio.CAP_PROP_FPS);
+    public int getFps() {
+        return (int)_cap.get(Videoio.CAP_PROP_FPS);
+    }
+
+    public int getFrameNumber() {
+        return (int)_cap.get(Videoio.CAP_PROP_POS_FRAMES);
     }
 
     public abstract void reopen() throws IOException;

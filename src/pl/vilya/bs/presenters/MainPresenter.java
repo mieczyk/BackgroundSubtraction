@@ -47,7 +47,7 @@ public class MainPresenter {
         setButtonsStateForPausedVideo();
 
         VideoFrame firstFrame = _video.getFrame();
-        _view.displayOutput(new VideoInfo(firstFrame.toImage(), null));
+        _view.displayOutput(new VideoInfo(firstFrame.toImage(), null, 0, 0));
     }
 
     public void startVideoProcessing() {
