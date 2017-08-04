@@ -2,11 +2,11 @@ package pl.vilya.bs.viewmodels;
 
 import java.awt.*;
 
-public class VideoImages {
+public class VideoInfo {
     private final Image _inputFrameImage;
     private final Image _maskFrameImage;
 
-    public VideoImages(Image inputFrameImage, Image maskFrameImage) {
+    public VideoInfo(Image inputFrameImage, Image maskFrameImage) {
         _inputFrameImage = inputFrameImage;
         _maskFrameImage = maskFrameImage;
     }

@@ -8,7 +8,7 @@ import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
 import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
 import pl.vilya.bs.views.MainWindow;
-import pl.vilya.bs.viewmodels.VideoImages;
+import pl.vilya.bs.viewmodels.VideoInfo;
 
 import javax.swing.*;
 import java.io.File;
@@ -47,7 +47,7 @@ public class MainPresenter {
         setButtonsStateForPausedVideo();
 
         VideoFrame firstFrame = _video.getFrame();
-        _view.displayOutput(new VideoImages(firstFrame.toImage(), null));
+        _view.displayOutput(new VideoInfo(firstFrame.toImage(), null));
     }
 
     public void startVideoProcessing() {

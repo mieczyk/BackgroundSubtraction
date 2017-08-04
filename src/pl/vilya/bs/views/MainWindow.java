@@ -3,7 +3,7 @@ package pl.vilya.bs.views;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
 import pl.vilya.bs.presenters.MainPresenter;
 import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
-import pl.vilya.bs.viewmodels.VideoImages;
+import pl.vilya.bs.viewmodels.VideoInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +72,7 @@ public class MainWindow extends JFrame {
         return new VideoFileChooser().open(_mainPanel, currentDirectory);
     }
 
-    public void displayOutput(VideoImages output) {
+    public void displayOutput(VideoInfo output) {
         _inputVideoViewer.setFrameImage(output.getInputFrameImage());
         _maskVideoViewer.setFrameImage(output.getMaskFrameImage());
     }

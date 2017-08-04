@@ -4,11 +4,11 @@ import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
 import pl.vilya.bs.views.MainWindow;
-import pl.vilya.bs.viewmodels.VideoImages;
+import pl.vilya.bs.viewmodels.VideoInfo;
 
 import javax.swing.*;
 
-public class FramesProcessor extends SwingWorker<Void, VideoImages> {
+public class FramesProcessor extends SwingWorker<Void, VideoInfo> {
     private final MainWindow _view;
     private final VideoStream _video;
     private volatile boolean _paused;
@@ -42,7 +42,7 @@ public class FramesProcessor extends SwingWorker<Void, VideoImages> {
             if(!_paused && frame != null) {
 
                 VideoFrame mask = _bgSubtractionMethod.applyCurrent(frame);
-                VideoImages output = new VideoImages(frame.toImage(), mask.toImage());
+                VideoInfo output = new VideoInfo(frame.toImage(), mask.toImage());
 
                 publish(output);
 
@@ -65,7 +65,7 @@ public class FramesProcessor extends SwingWorker<Void, VideoImages> {
     }
 
     @Override
-    protected void process(java.util.List<VideoImages> output) {
+    protected void process(java.util.List<VideoInfo> output) {
         output.forEach(_view::displayOutput);
     }
 
