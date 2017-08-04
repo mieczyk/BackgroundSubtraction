@@ -4,7 +4,7 @@ import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
 import pl.vilya.bs.views.MainWindow;
-import pl.vilya.bs.views.VideoImages;
+import pl.vilya.bs.viewmodels.VideoImages;
 
 import javax.swing.*;
 

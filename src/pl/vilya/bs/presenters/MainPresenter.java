@@ -8,7 +8,7 @@ import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
 import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
 import pl.vilya.bs.views.MainWindow;
-import pl.vilya.bs.views.VideoImages;
+import pl.vilya.bs.viewmodels.VideoImages;
 
 import javax.swing.*;
 import java.io.File;

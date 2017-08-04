@@ -1,4 +1,4 @@
-package pl.vilya.bs.views;
+package pl.vilya.bs.viewmodels;
 
 import java.awt.*;
 

@@ -3,6 +3,7 @@ package pl.vilya.bs.views;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
 import pl.vilya.bs.presenters.MainPresenter;
 import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
+import pl.vilya.bs.viewmodels.VideoImages;
 
 import javax.swing.*;
 import java.awt.*;
