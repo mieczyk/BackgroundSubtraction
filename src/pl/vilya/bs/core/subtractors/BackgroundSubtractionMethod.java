@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class BackgroundSubtractionMethod {
     private final static Object _lockObject = new Object();
-    private final Map<Class<? extends BackgroundSubtractor>, BackgroundSubtractor> _subtractors;
-    private Class<? extends BackgroundSubtractor> _current;
+
+    private BackgroundSubtractor _subtractor;
 
     /**
      * The value between 0 and 1 that indicates how fast the background model is learnt.
@@ -24,12 +24,8 @@ public class BackgroundSubtractionMethod {
     private double _learningRate;
 
     public BackgroundSubtractionMethod() {
-        _subtractors = new HashMap<>(2);
-        _subtractors.put(BackgroundSubtractorMOG2.class, Video.createBackgroundSubtractorMOG2());
-        _subtractors.put(BackgroundSubtractorKNN.class, Video.createBackgroundSubtractorKNN());
-
-        _current = BackgroundSubtractorMOG2.class;
         _learningRate = -1;
+        _subtractor = Video.createBackgroundSubtractorMOG2();
     }
 
     public double getLearningRate() {
@@ -42,25 +38,32 @@ public class BackgroundSubtractionMethod {
         }
     }
 
-    public BackgroundSubtractor getSubtractor(Class<? extends BackgroundSubtractor> subtractorType) {
-        return _subtractors.get(subtractorType);
-    }
-
-    public void setCurrent(Class<? extends BackgroundSubtractor> subtractorType, BackgroundSubtractorConfig config) {
+    public void setSubtractor(BackgroundSubtractor subtractor, BackgroundSubtractorConfig config) {
         synchronized (_lockObject) {
-            _current = subtractorType;
-            config.apply(_subtractors.get(_current));
+            _subtractor = subtractor;
+            config.apply(_subtractor);
         }
     }
 
-    public VideoFrame applyCurrent(VideoFrame frame) {
+    public BackgroundSubtractor getSubtractor() {
+        return _subtractor;
+    }
+
+    public VideoFrame apply(VideoFrame frame) {
         Mat mask = new Mat();
 
         synchronized (_lockObject) {
-            BackgroundSubtractor subtractor = _subtractors.get(_current);
-            subtractor.apply(frame.getMat(), mask, _learningRate);
+            _subtractor.apply(frame.getMat(), mask, _learningRate);
         }
 
         return new VideoFrame(mask);
+    }
+
+    public static BackgroundSubtractor createSubtractor(Class<? extends BackgroundSubtractor> subtractorType) {
+        if(subtractorType == BackgroundSubtractorMOG2.class) {
+            return Video.createBackgroundSubtractorMOG2();
+        }
+
+        return null;
     }
 }

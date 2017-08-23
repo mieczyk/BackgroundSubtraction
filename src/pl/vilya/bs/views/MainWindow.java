@@ -1,5 +1,8 @@
 package pl.vilya.bs.views;
 
+import org.opencv.video.BackgroundSubtractorKNN;
+import org.opencv.video.BackgroundSubtractorMOG2;
+import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
 import pl.vilya.bs.presenters.MainPresenter;
 import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;

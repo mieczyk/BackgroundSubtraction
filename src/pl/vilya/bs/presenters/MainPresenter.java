@@ -1,14 +1,17 @@
 package pl.vilya.bs.presenters;
 
+import org.opencv.video.BackgroundSubtractor;
 import org.opencv.video.BackgroundSubtractorMOG2;
+import org.opencv.video.Video;
 import pl.vilya.bs.core.VideoFileStream;
 import pl.vilya.bs.core.VideoFrame;
 import pl.vilya.bs.core.VideoStream;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractionMethod;
 import pl.vilya.bs.core.subtractors.BackgroundSubtractorMog2Config;
+import pl.vilya.bs.core.subtractors.SubtractorConfigurationsManager;
 import pl.vilya.bs.viewmodels.BgSubtractionMethodSettings;
-import pl.vilya.bs.views.MainWindow;
 import pl.vilya.bs.viewmodels.VideoInfo;
+import pl.vilya.bs.views.MainWindow;
 
 import javax.swing.*;
 import java.io.File;
@@ -19,10 +22,12 @@ public class MainPresenter {
     private File _lastSelectedDirectory = null;
     private VideoStream _video = null;
     private FramesProcessor _processor = null;
+    private final SubtractorConfigurationsManager _configsManager;
     private final BackgroundSubtractionMethod _bgSubtractionMethod;
 
     public MainPresenter(MainWindow view) {
         _view = view;
+        _configsManager = new SubtractorConfigurationsManager();
         _bgSubtractionMethod = new BackgroundSubtractionMethod();
     }
 
@@ -35,7 +40,6 @@ public class MainPresenter {
         }
 
         _lastSelectedDirectory = videoFile.getParentFile();
-        _processor = null;
 
         try {
             _video = new VideoFileStream(videoFile.getAbsolutePath());
@@ -43,6 +47,15 @@ public class MainPresenter {
             _view.showErrorMessage(e.getMessage());
             return;
         }
+
+        _processor = null;
+
+        // Reset the current subtractor.
+        BackgroundSubtractor subtractor = _bgSubtractionMethod.getSubtractor();
+        _bgSubtractionMethod.setSubtractor(
+                BackgroundSubtractionMethod.createSubtractor(subtractor.getClass()),
+                _configsManager.getConfig(subtractor.getClass())
+        );
 
         setButtonsStateForPausedVideo();
 
@@ -105,19 +118,16 @@ public class MainPresenter {
     }
 
     public void selectBackgroundSubtractorMog2() {
-        BackgroundSubtractorMOG2 subtractor = (BackgroundSubtractorMOG2)
-                _bgSubtractionMethod.getSubtractor(
-                        BackgroundSubtractorMOG2.class
-                );
-
-        BackgroundSubtractorMog2Config config = new BackgroundSubtractorMog2Config(subtractor);
+        BackgroundSubtractorMog2Config config = (BackgroundSubtractorMog2Config)
+                _configsManager.getConfig(BackgroundSubtractorMOG2.class);
 
         BgSubtractionMethodSettings<BackgroundSubtractorMog2Config> settings =
                 _view.showBackgroundSubtractorMog2Dialog(config, _bgSubtractionMethod.getLearningRate());
 
         if(settings != null) {
-            _bgSubtractionMethod.setCurrent(BackgroundSubtractorMOG2.class, settings.getConfig());
+            _configsManager.setConfig(BackgroundSubtractorMOG2.class ,settings.getConfig());
             _bgSubtractionMethod.setLearningRate(settings.getLearningRate());
+            _bgSubtractionMethod.setSubtractor(Video.createBackgroundSubtractorMOG2(), settings.getConfig());
         }
     }
 }
