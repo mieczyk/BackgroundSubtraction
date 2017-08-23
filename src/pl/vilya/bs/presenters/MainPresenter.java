@@ -130,4 +130,8 @@ public class MainPresenter {
             _bgSubtractionMethod.setSubtractor(Video.createBackgroundSubtractorMOG2(), settings.getConfig());
         }
     }
+
+    public void selectBackgroundSubtractorKnn() {
+        _view.showBackgroundSubtractorKnnDialog();
+    }
 }

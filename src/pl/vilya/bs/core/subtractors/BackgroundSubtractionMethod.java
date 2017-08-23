@@ -66,4 +66,13 @@ public class BackgroundSubtractionMethod {
 
         return null;
     }
+
+    public static String getDisplayName(Class<? extends BackgroundSubtractor> subtractorType) {
+        Map<Class<? extends BackgroundSubtractor>, String> map = new HashMap<>(2);
+
+        map.put(BackgroundSubtractorMOG2.class, "Gaussian mixture-based BG/FG segmentation algorithm");
+        map.put(BackgroundSubtractorKNN.class, "K-nearest neighbors BG/FG segmentation algorithm");
+
+        return map.get(subtractorType);
+    }
 }

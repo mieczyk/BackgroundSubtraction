@@ -22,7 +22,7 @@ public class MainWindow extends JFrame {
     private VideoViewer _maskVideoViewer;
     private JLabel _frameNumberLabel;
     private JLabel _fpsLabel;
-    private JPanel _informationPanel;
+    private JLabel _selectedAlgorithmLabel;
     private final MainPresenter _presenter;
 
     public MainWindow(String title) {
@@ -34,6 +34,10 @@ public class MainWindow extends JFrame {
 
         _startButton.addActionListener(e -> _presenter.startVideoProcessing());
         _stopButton.addActionListener(e -> _presenter.stopVideoProcessing());
+
+        _selectedAlgorithmLabel.setText(
+                BackgroundSubtractionMethod.getDisplayName(BackgroundSubtractorMOG2.class)
+        );
 
         setContentPane(_mainPanel);
         pack();
@@ -66,6 +70,7 @@ public class MainWindow extends JFrame {
         bgSubtractionMethodsMenu.add(bgSubtractorMog2Item);
 
         JMenuItem bgSubtractorKnnItem = new JMenuItem("BackgroundSubtractorKNN", KeyEvent.VK_K);
+        bgSubtractorKnnItem.addActionListener(e ->_presenter.selectBackgroundSubtractorKnn());
         bgSubtractionMethodsMenu.add(bgSubtractorKnnItem);
 
         menuBar.add(fileMenu);
@@ -99,10 +104,20 @@ public class MainWindow extends JFrame {
         BackgroundSubtractorMog2Dialog dialog = new BackgroundSubtractorMog2Dialog(config, learningRate);
 
         if(dialog.showDialog()) {
+            _selectedAlgorithmLabel.setText(
+                    BackgroundSubtractionMethod.getDisplayName(BackgroundSubtractorMOG2.class)
+            );
+
             return new BgSubtractionMethodSettings<>(dialog.getConfig(), dialog.getLearningRate());
         }
 
         return null;
+    }
+
+    public void showBackgroundSubtractorKnnDialog() {
+        _selectedAlgorithmLabel.setText(
+                BackgroundSubtractionMethod.getDisplayName(BackgroundSubtractorKNN.class)
+        );
     }
 
     public void showErrorMessage(String message) {
