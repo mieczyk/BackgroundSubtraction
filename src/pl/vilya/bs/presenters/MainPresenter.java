@@ -65,7 +65,7 @@ public class MainPresenter {
 
     public void startVideoProcessing() {
         if(_video == null) {
-            _view.showErrorMessage("No video file opened!");
+            _view.showErrorMessage("No video file has been opened!");
             return;
         }
 
