@@ -81,16 +81,13 @@ public class MainPresenter {
                 break;
 
             case DONE:
-                try {
-                    _video.reopen();
-                } catch (IOException e) {
-                    _view.showErrorMessage(e.getMessage());
+                if(reopenVideo()) {
+                    _processor = new FramesProcessor(_view, _video , _bgSubtractionMethod);
+                    _processor.execute();
+                    break;
+                } else {
                     return;
                 }
-
-                _processor = new FramesProcessor(_view, _video , _bgSubtractionMethod);
-                _processor.execute();
-                break;
 
             default:
                 _processor.resume();
@@ -128,10 +125,28 @@ public class MainPresenter {
             _configsManager.setConfig(BackgroundSubtractorMOG2.class ,settings.getConfig());
             _bgSubtractionMethod.setLearningRate(settings.getLearningRate());
             _bgSubtractionMethod.setSubtractor(Video.createBackgroundSubtractorMOG2(), settings.getConfig());
+
+            reopenVideo();
         }
     }
 
     public void selectBackgroundSubtractorKnn() {
         _view.showBackgroundSubtractorKnnDialog();
+        reopenVideo();
+    }
+
+    private boolean reopenVideo() {
+        boolean success = false;
+
+        if(_video != null) {
+            try {
+                _video.reopen();
+                success = true;
+            } catch (IOException e) {
+                _view.showErrorMessage(e.getMessage());
+            }
+        }
+
+        return success;
     }
 }
