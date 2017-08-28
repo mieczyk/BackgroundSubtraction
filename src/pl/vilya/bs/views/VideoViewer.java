@@ -2,6 +2,9 @@ package pl.vilya.bs.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 public class VideoViewer extends JLabel {
     private Image _frameImage = null;
@@ -17,7 +20,7 @@ public class VideoViewer extends JLabel {
 
         if(_frameImage != null) {
             drawScaledImage(
-                    _frameImage,
+                    (BufferedImage)_frameImage,
                     getWidth(),
                     getHeight(),
                     g
@@ -26,22 +29,38 @@ public class VideoViewer extends JLabel {
     }
 
     private static void drawScaledImage(
-            Image img,
+            BufferedImage img,
             int targetWidth,
             int targetHeight,
             Graphics g
 
     ) {
-        int currentWidth = img.getWidth(null);
-        int currentHeight = img.getHeight(null);
+        float ratio = getRatio(img, targetWidth, targetHeight);
+        Point offset = getOffset(img, targetWidth, targetHeight, ratio);
 
-        float ratio = Math.min(
-                (float) targetWidth / currentWidth,
-                (float) targetHeight / currentHeight
+        g.drawImage(
+                getScaledImage(img, targetWidth, targetHeight, ratio),
+                (int)offset.getX(),
+                (int)offset.getY(),
+                null
         );
+    }
 
-        int width = (int)(currentWidth * ratio);
-        int height = (int)(currentHeight * ratio);
+    private static float getRatio(BufferedImage img, int targetWidth, int targetHeight) {
+        return Math.min(
+                (float) targetWidth / img.getWidth(null),
+                (float) targetHeight / img.getHeight(null)
+        );
+    }
+
+    private static Point getOffset(
+            BufferedImage img,
+            int targetWidth,
+            int targetHeight,
+            float ratio
+    ) {
+        int width = (int)(img.getWidth(null) * ratio);
+        int height = (int)(img.getHeight(null) * ratio);
 
         int x = 0, y = 0;
 
@@ -53,6 +72,23 @@ public class VideoViewer extends JLabel {
             y = (targetHeight - height) / 2;
         }
 
-        g.drawImage(img, x, y, width, height, null);
+        return new Point(x, y);
+    }
+
+    private static BufferedImage getScaledImage(
+            BufferedImage img,
+            int targetWidth,
+            int targetHeight,
+            float ratio
+    ) {
+        AffineTransform scaleTransform = AffineTransform.getScaleInstance(ratio, ratio);
+        AffineTransformOp bilinearScaleOp = new AffineTransformOp(
+                scaleTransform,
+                AffineTransformOp.TYPE_BILINEAR
+        );
+
+        BufferedImage targetImage = new BufferedImage(targetWidth, targetHeight, img.getType());
+
+        return bilinearScaleOp.filter(img, targetImage);
     }
 }
