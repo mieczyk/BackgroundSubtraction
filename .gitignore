@@ -3,3 +3,6 @@
 *.iml
 *.iws
 /out/
+
+# HelpNDoc
+*.lck
