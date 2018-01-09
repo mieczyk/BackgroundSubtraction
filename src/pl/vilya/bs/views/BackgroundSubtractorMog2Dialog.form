@@ -49,7 +49,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="e3588" layout-manager="GridLayoutManager" row-count="12" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="e3588" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="0" bottom="10" right="0"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -73,16 +73,6 @@
             </constraints>
             <properties/>
           </component>
-          <component id="18a6d" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="(int) The number of last frames that affects the background model."/>
-            </properties>
-          </component>
           <component id="54356" class="javax.swing.JLabel">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -98,16 +88,6 @@
               </grid>
             </constraints>
             <properties/>
-          </component>
-          <component id="ba6d4" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;(double) Threshold for the squared Mahalanobis distance that helps decide when a sample is close to the existing components.&lt;br&gt;&#10;If it is not close to any component, a new component is generated.&lt;br&gt;&#10;In other words, it decides if the sample is well described by the background model or not.&#10;&lt;/html&gt;"/>
-            </properties>
           </component>
           <component id="23305" class="javax.swing.JLabel">
             <constraints>
@@ -267,106 +247,6 @@
             </constraints>
             <properties>
               <text value=""/>
-            </properties>
-          </component>
-          <component id="1f1d3" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;(int) Maximum allowed number of mixture components.&lt;br&gt;&#10;In other words, The number of Gaussian components in the background model.&#10;&lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="fd9b9" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;(double) Threshold defining whether the component is significant enough to be included into the background model.&#10;&lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="76109" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;(double) Initial variance for the newly generated components.&lt;br&gt;&#10;It affects the speed of adaptation.&lt;br&gt;&#10;The parameter value is based on your estimate of the typical standard deviation from the images.&#10;&lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="cc1f5" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt; (double) This parameter defines the number of samples needed to accept to prove the component exists. &lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="490b6" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;(double) The value between 0 and 1 that indicates how fast the background model is learnt.&lt;br&gt;&#10;Negative parameter value makes the algorithm to use some automatically chosen learning rate.&lt;br&gt;&#10;0 means that the background model is not updated at all, 1 means that the background model is completely reinitialized from the last frame.&#10;&lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="735f5" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;(bool) Parameter defining whether shadow detection should be enabled.&#10;&lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="2fb2e" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt; (int) The value for marking shadow pixels in the output foreground mask.&lt;br&gt; Value 0 always means background, 255 means foreground. &lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="3eff0" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt; (double) A shadow is detected if pixel is a darker version of the background.&lt;br&gt; It is a threshold defining how much darker the shadow can be.&lt;br&gt; Value 0.5 means that if a pixel is more than twice darker then it's not a shadow. &lt;/html&gt;"/>
-            </properties>
-          </component>
-          <component id="6d403" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="(double)"/>
-            </properties>
-          </component>
-          <component id="3449" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="question_mark_20.png"/>
-              <text value=""/>
-              <toolTipText value="(double)"/>
             </properties>
           </component>
         </children>
