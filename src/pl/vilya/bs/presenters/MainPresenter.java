@@ -14,8 +14,10 @@ import pl.vilya.bs.viewmodels.VideoInfo;
 import pl.vilya.bs.views.MainWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class MainPresenter {
     private final MainWindow _view;
@@ -133,6 +135,15 @@ public class MainPresenter {
     public void selectBackgroundSubtractorKnn() {
         _view.showBackgroundSubtractorKnnDialog();
         reopenVideo();
+    }
+
+    public void showManual() {
+        try {
+            URL index = getClass().getResource("/help/index.html");
+            Desktop.getDesktop().browse(index.toURI());
+        } catch (Exception e) {
+            _view.showErrorMessage(e.getMessage());
+        }
     }
 
     private boolean reopenVideo() {

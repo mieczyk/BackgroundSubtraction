@@ -73,8 +73,17 @@ public class MainWindow extends JFrame {
         bgSubtractorKnnItem.addActionListener(e ->_presenter.selectBackgroundSubtractorKnn());
         bgSubtractionMethodsMenu.add(bgSubtractorKnnItem);
 
+        // Help menu
+        JMenu helpMenu = new JMenu("Help");
+        helpMenu.setMnemonic(KeyEvent.VK_H);
+
+        JMenuItem manualItem = new JMenuItem("Manual", KeyEvent.VK_M);
+        manualItem.addActionListener(e -> _presenter.showManual());
+        helpMenu.add(manualItem);
+
         menuBar.add(fileMenu);
         menuBar.add(bgSubtractionMethodsMenu);
+        menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
     }
